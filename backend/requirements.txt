@@ -1,0 +1,51 @@
+# ============ CORE DEPENDENCIES ============
+fastapi==0.104.0
+uvicorn[standard]
+pydantic==2.4.2
+pydantic-settings==2.0.3
+python-dotenv==1.0.0
+
+# ============ DATABASE ============
+sqlalchemy==2.0.23
+psycopg[binary]==3.1.18
+alembic==1.12.1
+
+# ============ CACHING ============
+redis==5.0.1
+hiredis==2.2.3
+
+# ============ AUTHENTICATION ============
+python-jose[cryptography]==3.3.0
+passlib[bcrypt]==1.7.4
+python-multipart==0.0.6
+firebase-admin>=6.3.0
+
+# ============ ML LIBRARIES ============
+scikit-learn
+xgboost
+prophet
+pandas
+numpy
+joblib
+
+# ============ AWS INTEGRATION ============
+boto3>=1.35.36
+sagemaker==2.250.0
+botocore>=1.35.36
+
+# ============ UTILITIES ============
+httpx==0.25.1
+aioredis==2.0.1
+celery==5.3.4
+
+# ============ TESTING ============
+pytest==7.4.3
+pytest-asyncio==0.21.1
+pytest-cov==4.1.0
+pytest-mock==3.12.0
+
+# ============ DEVELOPMENT ============
+black==23.11.0
+flake8==6.1.0
+mypy==1.7.1
+pre-commit==3.5.0

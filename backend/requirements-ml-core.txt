@@ -1,0 +1,8 @@
+scikit-learn
+xgboost
+prophet
+pandas
+numpy
+joblib
+wheel
+setuptools

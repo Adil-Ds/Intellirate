@@ -1,0 +1,11 @@
+scikit-learn
+xgboost
+prophet
+pandas
+numpy
+joblib
+boto3
+sagemaker>=2.200.0
+python-dotenv
+setuptools
+wheel
