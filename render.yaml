@@ -1,0 +1,59 @@
+services:
+  - type: web
+    name: intellirate-backend
+    env: python
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: alembic upgrade head && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      # ── Database (Neon.tech PostgreSQL - free tier) ──────────────────────────
+      # Paste your Neon connection string here (from https://neon.tech dashboard)
+      - key: DATABASE_URL
+        value: postgresql://neondb_owner:npg_uzTmO60JlEfo@ep-winter-lake-amhtnrgw-pooler.c-5.us-east-1.aws.neon.tech/neondb?sslmode=require&channel_binding=require
+
+      # ── Redis (Upstash free tier - https://upstash.com) ─────────────────────
+      # Replace with your Upstash Redis URL when ready
+      - key: REDIS_URL
+        value: redis://localhost:6379/0   # ← update to Upstash URL
+
+      # ── Security ─────────────────────────────────────────────────────────────
+      - key: SECRET_KEY
+        generateValue: true               # Render auto-generates a secure value
+
+      - key: ALGORITHM
+        value: HS256
+
+      - key: ACCESS_TOKEN_EXPIRE_MINUTES
+        value: "30"
+
+      # ── App Config ───────────────────────────────────────────────────────────
+      - key: APP_NAME
+        value: IntelliRate Gateway
+
+      - key: APP_VERSION
+        value: 1.0.0
+
+      - key: DEBUG
+        value: "false"
+
+      - key: LOG_LEVEL
+        value: INFO
+
+      # ── CORS ─────────────────────────────────────────────────────────────────
+      # Replace with your actual frontend URL on Vercel/Netlify
+      - key: BACKEND_CORS_ORIGINS
+        value: '["https://your-frontend.vercel.app","http://localhost:5173"]'
+
+      # ── Groq AI ──────────────────────────────────────────────────────────────
+      - key: GROQ_API_KEY
+        value: ""   # Paste your Groq API key here
+
+      - key: GROQ_API_URL
+        value: https://api.groq.com/openai/v1/chat/completions
+
+      # ── ML Configuration ─────────────────────────────────────────────────────
+      - key: USE_CLOUD_ML
+        value: "false"
+
+      - key: ENABLE_ML_FALLBACK
+        value: "true"

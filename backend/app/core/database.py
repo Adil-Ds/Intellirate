@@ -7,11 +7,17 @@ from sqlalchemy.orm import sessionmaker
 from app.core.config import settings
 
 # Create database engine
+# Neon.tech serverless PostgreSQL requires SSL and smaller pool sizes
+_connect_args = {}
+if "neon.tech" in settings.DATABASE_URL or "sslmode=require" in settings.DATABASE_URL:
+    _connect_args = {"sslmode": "require"}
+
 engine = create_engine(
     settings.DATABASE_URL,
     pool_pre_ping=True,
-    pool_size=10,
-    max_overflow=20
+    pool_size=5,
+    max_overflow=10,
+    connect_args=_connect_args,
 )
 
 # Create session factory

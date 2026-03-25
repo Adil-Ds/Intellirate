@@ -17,8 +17,9 @@ from app.models import request_log  # Import all models
 # this is the Alembic Config object
 config = context.config
 
-# Override sqlalchemy.url from environment
-config.set_main_option('sqlalchemy.url', settings.DATABASE_URL)
+# Override sqlalchemy.url from environment variable directly (works on Render + locally)
+db_url = os.environ.get("DATABASE_URL") or settings.DATABASE_URL
+config.set_main_option('sqlalchemy.url', db_url)
 
 # Interpret the config file for Python logging
 if config.config_file_name is not None:
